@@ -1,36 +1,65 @@
 # pytorch学习 b站小土堆
 ## 1.dataset和dataloader的联系
-![alt text](./image/image.png)
 
 dataset是告诉程序数据集的一些具体参数，其实可以直接理解成数据集吧
 
-dataload是从dataset中读取设置，比如一次读取四张
+![alt text](https://production-media.paperswithcode.com/datasets/Screen_Shot_2021-01-29_at_2.16.15_PM.png)
+
+
+
+dataloader是从dataset中读取设置，比如一次读取四张
 
 dataloader的具体工作形式如下图
 
-![alt text](./image/image-1.png)
+![alt text](https://i-blog.csdnimg.cn/blog_migrate/0484efcfdcaf6a58211e3b671cae24b9.png)
 
 batch_size设置为4就每次从dataset里面读取四张并打包
 
 dataloader返回的数据里面包含有图像以及对应的标签序号
 
+#### 两者的区别总结如下：
+Dataset是代表这一数据的抽象类（也就是基类）。我们可以通过继承和重写这个抽象类实现自己的数据类，只需要定义__len__和__getitem__这个两个函数。
+DataLoader是Pytorch中用来处理模型输入数据的一个工具类。组合了数据集（dataset） + 采样器(sampler)，并在数据集上提供单线程或多线程(num_workers )的可迭代对象。在DataLoader中有多个参数，这些参数中重要的几个参数的含义说明如下：
+ ```python
+
+函数原型 torch.utils.data.DataLoader(dataset, batch_size=1, 
+    shuffle=False, sampler=None, 
+    batch_sampler=None, num_workers=0, 
+    collate_fn=None, pin_memory=False, 
+    drop_last=False, timeout=0, 
+    worker_init_fn=None, multiprocessing_context=None)
+
+1. epoch：所有的训练样本输入到模型中称为一个epoch； 
+ 2. iteration：一批样本输入到模型中，成为一个Iteration;
+ 3. batchszie：批大小，决定一个epoch有多少个Iteration；
+ 4. 迭代次数（iteration）=样本总数（epoch）/批尺寸（batchszie）
+ 5. dataset (Dataset) – 决定数据从哪读取或者从何读取；
+ 6. batch_size (python:int, optional) – 批尺寸(每次训练样本个数,默认为１）
+ 7. shuffle (bool, optional) –每一个 epoch是否为乱序 (default: False)；
+ 8. num_workers (python:int, optional) – 是否多进程读取数据（默认为０);
+ 9. drop_last (bool, optional) – 当样本数不能被batchsize整除时，最后一批数据是否舍弃（default: False)
+ 10. pin_memory（bool, optional) - 如果为True会将数据放置到GPU上去（默认为false） 
+
+```
+
 ## 2.torch.nn里面的一些函数和参数
 下图展示了自行搭建神经网络中的一些自定义函数操作
-![alt text](./image/image-2.png)
+
+~~图片不见啦~~
 
 
 ### 2.1关于tensor张量的一些理解
-![alt text](./image/image-5.png) -> ![alt text](./image/image-3.png) 
+
+~~图片不见啦~~
 
 这个右图里面的代码是写入了一个二维矩阵，这个二维矩阵就是对应左图的里面的图像，然后并将其转化为二维tensor的数据类型。
 
-对于这个又该怎么理解![alt text](./image/image-6.png)
+对于这个又该怎么理解 [64,3,32,32]
 
 四个参数分别解释为：图片数量、通道数、长、宽
 (batch_size channel hight weight)
 如果出现-1 意味着自动计算 而不是真的-1
 
-1111
 
 
 ### 2.2池化操作Pooling--减少数据量
@@ -88,4 +117,5 @@ tensorboard：用于显示训练的一些损失函数的情况，我的理解就
 
 ### 3.2
 nn.Xxx和nn.functional.xxx的实际功能是相同的，即nn.Conv2d和nn.functional.conv2d 都是进行卷积，nn.Dropout 和nn.functional.dropout都是进行dropout，运行效率也是近乎相同。
+
 ![alt text](https://i-blog.csdnimg.cn/blog_migrate/ff059353a56c5d58049ccda19e5ee754.png)
