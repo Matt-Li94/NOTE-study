@@ -37,7 +37,7 @@ DataLoader是Pytorch中用来处理模型输入数据的一个工具类。组合
  6. batch_size (python:int, optional) – 批尺寸(每次训练样本个数,默认为１）
  7. shuffle (bool, optional) –每一个 epoch是否为乱序 (default: False)；
  8. num_workers (python:int, optional) – 是否多进程读取数据（默认为０);
- 9. drop_last (bool, optional) – 当样本数不能被batchsize整除时，最后一批数据是否舍弃（default: False)
+ 9. drop_last (bool, optional) – 当样本数不能被batchsize整除时，最后一批数据是否舍弃（default: False) #默认设置false不丢弃 要想丢弃需要设置为true
  10. pin_memory（bool, optional) - 如果为True会将数据放置到GPU上去（默认为false） 
 
 ```
@@ -131,3 +131,16 @@ tensorboard：用于显示训练的一些损失函数的情况，我的理解就
 nn.Xxx和nn.functional.xxx的实际功能是相同的，即nn.Conv2d和nn.functional.conv2d 都是进行卷积，nn.Dropout 和nn.functional.dropout都是进行dropout，运行效率也是近乎相同。
 
 ![alt text](https://i-blog.csdnimg.cn/blog_migrate/ff059353a56c5d58049ccda19e5ee754.png)
+
+## 5.训练模型的大致步骤
+1.获得dataset
+
+2.使用dataloader读取dataset
+
+3.创建网络模型和必要的参数
+
+4.设置损失函数和优化器，此处包含三个小步骤
+
+    4.1梯度清零
+    4.2反向传播
+    4.3梯度更新
