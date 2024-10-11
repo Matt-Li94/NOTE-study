@@ -107,15 +107,27 @@ torch.nn里面包含很多封装好的层，需要重点关注的有线形层Lin
 ![alt text](https://i-blog.csdnimg.cn/blog_migrate/db8d971ff3e42d103b383546b2e4fe66.png)
 
 
-## 3.一些杂记
-### 3.1
+
+## 3.模型的保存和读取
+此处只记录保存方式1（非官方），可以保存整个网络的结构和参数，具体操作如下：
+```python
+vgg = torchvision.models.vgg16(weights= None) #加载模型
+torch.save(vgg16,"vgg16_modle.pth") #将vgg16模型另存为vgg16_modle.pth文件
+vgg16_model = torch.load("vgg16_modle.pth") #将vgg16_modle.pth模型加载为vgg16_modle
+
+
+#一般来说保存和加载是在两个分开不同的文件中进行的，在训练那边保存好模型之后再在应用那边加载模型
+```
+
+## 4.一些杂记
+### 4.1
 torchvision：专门用于处理是视觉的torch，里面有准备好的数据集，例如coco数据集
 
 tensorboard：用于显示训练的一些损失函数的情况，我的理解就是显示张量的黑板
 
 貌似torch里面都集成的都是一些类，具体使用还得要使用这些类来创造对象之后再通过对象来调用方法。具体有什么函数我不太记得了。
 
-### 3.2
+### 4.2
 nn.Xxx和nn.functional.xxx的实际功能是相同的，即nn.Conv2d和nn.functional.conv2d 都是进行卷积，nn.Dropout 和nn.functional.dropout都是进行dropout，运行效率也是近乎相同。
 
 ![alt text](https://i-blog.csdnimg.cn/blog_migrate/ff059353a56c5d58049ccda19e5ee754.png)
