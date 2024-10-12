@@ -49,8 +49,21 @@ DataLoader是Pytorch中用来处理模型输入数据的一个工具类。组合
 
 
 ### 2.1关于tensor张量的一些理解
+以下是目前我看到最直观的张量解释：
 
-~~图片不见啦~~
+在深度学习里，Tensor实际上就是一个多维数组（multidimensional array）。而Tensor的目的是能够创造更高维度的矩阵、向量。
+
+![alt text](https://pic4.zhimg.com/v2-91fefb9a6227e8c11f8df316bc30cbb5_r.jpg)
+
+现在将三维的张量用一个正方体来表示：
+
+![alt text](https://pic1.zhimg.com/v2-b279b633e5f17f7a0519601d99689298_r.jpg)
+
+这样子可以进一步生成更高维的张量：
+
+![alt text](https://pic3.zhimg.com/80/v2-00d07246473e1b195b4b69a84fec280a_720w.jpg)
+
+“其实深度学习里的tensor就是一种GPU上的数据结构，n维数组，没有物理和数学上的性质”没有必要泰国纠结意义。
 
 这个右图里面的代码是写入了一个二维矩阵，这个二维矩阵就是对应左图的里面的图像，然后并将其转化为二维tensor的数据类型。
 
