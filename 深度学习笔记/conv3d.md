@@ -7,8 +7,7 @@
 对于这么一个卷积核对这个论文（PVBLiF）中图片上的输入进行卷积：
 
     self.h_conv1 = nn.Conv3d(in_channels=1, out_channels=64, kernel_size=(5,1,1), stride=(5,1,1))
-![alt text](../image/conv3d_1.png)
-
+![alt text](..\image\conv3d_1.png)
 解释：
 让我们逐步分解：
 
