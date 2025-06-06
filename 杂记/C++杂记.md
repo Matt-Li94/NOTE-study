@@ -1,0 +1,49 @@
+# Google风格C++规范
+https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents.html
+```cpp
+/*通用的变量名字命名，不要太多缩写，小写加下划线*/
+int price_count_reader;    // 无缩写
+int num_errors;            // "num" 是一个常见的写法
+int num_dns_connections;   // 人人都知道 "DNS" 是什么
+/*对于类的命名采用驼峰命名法*/
+AddTableEntry()
+DeleteUrl()
+OpenFileOrDie()
+```
+## c++ 智能指针和原始指针的写法区别
+```cpp
+#include <memory>
+int main(){
+    std::unique_ptr<ListNode> uptr = std::make_unique<ListNode>(); /*()是构造函数的接受参数 */
+    ListNode* ptr = new ListNode();
+    /*
+        ...
+    */
+    delete ptr;
+    ptr = nullptr;
+    /* 注意new和没有new的是有区别的 */
+    ListNode* ptr = nullptr;
+    /* 没有new就没有内存操作的过程 就是只是构造了一个指针但是没有为其分配内存 没有使用它去操作内存 */
+}
+```
+
+## std::shared_ptr 的更深理解
+```cpp
+void example() {
+    std::shared_ptr<int> p1 = std::make_shared<int>(42);  // ① 创建 p1
+    std::shared_ptr<int> p2 = std::make_shared<int>(0);   // ② 创建 p2
+    p2 = p1;                                                // ③ p2 指向 p1 的资源 同时p2指向的内存引用计数减1 p1指向的内存的引用计数加1
+    
+    // 此时：
+    // - p1 和 p2 都指向 int 42（引用计数为 2）
+    // - int 0 已被释放（p2 赋值时释放了原有资源）
+
+}  // ④ 函数结束，p1 和 p2 超出作用域
+
+
+    /* 核心概念区分：
+    智能指针对象（如p1和p2）：
+    它们是栈上的局部变量，生命周期由其作用域决定（例如函数结束时）。
+    管理的内存（如int 42）：
+    它是堆上的动态分配对象，生命周期由引用计数决定（当引用计数为 0 时释放）。*/
+```
