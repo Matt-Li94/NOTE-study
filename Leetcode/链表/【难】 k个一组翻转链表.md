@@ -49,7 +49,12 @@ public:
         for(;lenth>=k;lenth-=k){ //注意边界
             //外层循环 计算多少次翻转
             for(int i{0};i<k;i++){ //注意边界
-                //内层循环：进行每次翻转
+                //内层循环：进行每次翻转 注意内层循环的翻转链表就是最简单的翻转链表的逻辑
+
+
+                // 注意内层循环的翻转链表就是最简单的翻转链表的逻辑
+
+                
                 ListNode* nxt_inside = cur->next;
                 cur->next = pre;
                 pre = cur;
